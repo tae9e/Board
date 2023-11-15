@@ -35,7 +35,9 @@ public class BoardDAO {
 		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
 		try {
 			conn = ds.getConnection();
-			String sql = "select num,writer,title,content,to_char(writeday, 'YYYY/MM/DD')writeday,Readcnt,repRoot,repStep,repIndent "
+			String sql = "select num,writer,title, "
+					+ "content,to_char(writeday, 'YYYY/MM/DD') writeday, "
+					+ "Readcnt,repRoot,repStep,repIndent "
 					+ " from boardT order by num desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -99,6 +101,7 @@ public class BoardDAO {
 		}
 	}
 
+	
 	// 글, 제목 검색(LIKE)
 	public ArrayList<BoardDTO> search(String searchName, String searchValue) {
 		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
@@ -186,7 +189,7 @@ public class BoardDAO {
 	}
 
 	// 수정
-	public void update(String num, String writer, String title, String content) {
+	public void update(int num, String writer, String title, String content) {
 		try {
 			conn = ds.getConnection();
 			String sql = "update boardT set title=?, writer=?, content=? where num=?";
@@ -194,7 +197,7 @@ public class BoardDAO {
 			pstmt.setString(1, title);
 			pstmt.setString(2, writer);
 			pstmt.setString(3, content);
-			pstmt.setInt(4, Integer.parseInt(num));
+			pstmt.setInt(4, num);
 			pstmt.executeUpdate();
 
 			conn.commit();
