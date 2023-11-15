@@ -21,7 +21,7 @@ import service.BoardwriteCommand;
 @WebServlet("*.do")
 public class BoardFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private int a = 1;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
